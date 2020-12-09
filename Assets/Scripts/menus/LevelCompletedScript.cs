@@ -4,23 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelCompletedScript : MonoBehaviour {
-    
-    public int currentLevel = 1;
-    public int numOfLevels = 2;
     public GameObject[] levels;
-    private ArrayList levelCompleted = new ArrayList();
+    private int numOfLevels = 2;
+    private static LevelSelectorScript[] level;
+    public Text testText;
+    
+    void Start() {
+        level = FindObjectsOfType<LevelSelectorScript>();
 
-    void Update() {
-        LevelUpdate();
     }
 
-    void updateLevel() {
-        currentLevel += 1;
+    void Update() {
+        testText.text = "Current Level: " + StaticLevelScript.currentLevel.ToString();
+        LevelUpdate();
     }
 
     void LevelUpdate() {
         for (int i = 0; i < numOfLevels; i++) {
-            if (i > currentLevel-1) {
+            if (i > StaticLevelScript.currentLevel-1) {
                 levels[i].SetActive(false);
             } else {
                 levels[i].SetActive(true);
@@ -29,7 +30,8 @@ public class LevelCompletedScript : MonoBehaviour {
     }
 
     void ResetCurrentLevel() {
-        currentLevel = 1;
+        StaticLevelScript.currentLevel = 1;
     }
+
 
 }

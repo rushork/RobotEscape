@@ -7,6 +7,9 @@ public class DoorScript : MonoBehaviour {
 
     void OnCollisionEnter2D (Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
+            if (StaticLevelScript.currentLevel == StaticLevelScript.indexLast) {
+                StaticLevelScript.currentLevel += 1;
+            }
             Destroy(other.gameObject);
             SceneManager.LoadScene("LevelSelector");
         }
